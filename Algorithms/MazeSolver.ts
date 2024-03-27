@@ -1,3 +1,5 @@
+// When theres a (/*Point*/) the argument should be Point. But as i dont have it implemented, i switched it up to any, so there are no errors in the file
+
 const dir = [
     [-1, 0],
     [1, 0],
