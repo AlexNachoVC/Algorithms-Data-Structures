@@ -1,5 +1,3 @@
-// When theres a (/*Point*/) the argument should be Point. But as i dont have it implemented, i switched it up to any, so there are no errors in the file
-
 const dir = [
     [-1, 0],
     [1, 0],
@@ -7,7 +5,7 @@ const dir = [
     [0, 1],
 ];
 
-function walk(maze: string[], wall: string, curr: any /*Point*/, end: any /*Point*/, seen: boolean[][], path: string[]/*Point[]*/): boolean {
+function walk(maze: string[], wall: string, curr: Point , end: Point , seen: boolean[][], path: Point[]): boolean {
 
     // 1. Base Case
     // Off the map
@@ -54,9 +52,9 @@ function walk(maze: string[], wall: string, curr: any /*Point*/, end: any /*Poin
 }
 
 
-export default function solve(maze: string[], wall: string, start: any /*Point*/, end: any /*Point*/): string[] /*Point[]*/ {
+export default function solve(maze: string[], wall: string, start: Point , end: Point ): Point[]  {
     const seen: boolean[][] = [];
-    const path: string[] /*Point[]*/ = [];
+    const path: Point[]  = [];
 
     for (let i = 0; i < maze.length; ++i) {
         seen.push (new Array(maze[0].length).fill(false));
