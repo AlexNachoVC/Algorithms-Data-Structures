@@ -14,4 +14,20 @@ export default class MinHeap {
     delete(): number {
 
     }
+
+    
+
+    private parent(idx: number): number {
+        return Math.floor((idx - 1) / 2);
+    }
+
+    private leftChild(idx: number): number {
+        return idx * 2 + 1;
+    }
+
+    private rightChild(idx: number): number {
+        return idx * 2 + 2;
+    }
+
+
 }
