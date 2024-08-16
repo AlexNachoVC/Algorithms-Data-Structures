@@ -5,6 +5,8 @@ int main() {
 
     base.inicializar();
     base.imprimir();
+    base.bubbleSort();
+    base.imprimir();
 
     return 0;
 }

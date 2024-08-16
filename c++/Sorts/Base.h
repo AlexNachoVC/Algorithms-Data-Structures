@@ -1,6 +1,4 @@
 #pragma once
-#include <ctime>
-#include <iostream>
 
 using namespace std;
 
@@ -13,4 +11,6 @@ private:
 public:
     void inicializar();
     void imprimir();
+    void bubbleSort();
+    void insertionSort();
 };

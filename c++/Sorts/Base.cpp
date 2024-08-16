@@ -1,3 +1,5 @@
+#include <ctime>
+#include <iostream>
 #include "Base.h"
 
 void Base::inicializar() {
@@ -13,3 +15,21 @@ void Base::imprimir() {
     }
     cout << endl;
 };
+
+void Base::bubbleSort() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE - 1 - i; j++) {
+            if (arreglo[j] > arreglo[j + 1]) {
+                int tmp = arreglo[j + 1];
+                arreglo[j + 1] = arreglo[j];
+                arreglo[j] = tmp;
+            }
+        }
+    }
+}
+
+void Base::insertionSort() {
+    for (int i = 0; i < SIZE; i++) {
+        
+    }
+}
