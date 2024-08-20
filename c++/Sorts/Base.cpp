@@ -35,7 +35,7 @@ void Base::insertionSort() {
 
         while (j >= 0 && arreglo[j] > key ) {
             arreglo[j + 1] = arreglo[j];
-            j = j + 1;
+            j--;
         }       
         arreglo[j + 1] = key;
     }
