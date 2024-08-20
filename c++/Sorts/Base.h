@@ -14,4 +14,5 @@ public:
     void bubbleSort();
     void insertionSort();
     void selectionSort();
+    int factorial(int n);
 };
