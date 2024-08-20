@@ -30,6 +30,14 @@ void Base::bubbleSort() {
 
 void Base::insertionSort() {
     for (int i = 0; i < SIZE; i++) {
-        
+        int key = arreglo[i];
+        int j = i - 1;
+
+        while (j >= 0 && arreglo[j] > key ) {
+            arreglo[j + 1] = arreglo[j];
+            j = j + 1;
+        }       
+        arreglo[j + 1] = key;
     }
 }
+

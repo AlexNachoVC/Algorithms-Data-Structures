@@ -13,4 +13,5 @@ public:
     void imprimir();
     void bubbleSort();
     void insertionSort();
+    void selectionSort();
 };
