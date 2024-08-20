@@ -3,8 +3,6 @@
 
 int main() {
     Base base;
-    Base base2;
-    Base base3;
 
     base.inicializar();
     base.imprimir();
@@ -12,17 +10,18 @@ int main() {
     base.imprimir();
     cout << endl;
 
-    base2.inicializar();
-    base2.imprimir();
-    base2.insertionSort();
-    base2.imprimir();
+    base.inicializar();
+    base.imprimir();
+    base.insertionSort();
+    base.imprimir();
     cout << endl;
 
-    base3.inicializar();
-    base3.imprimir();
-    base3.selectionSort();
-    base3.imprimir();
+    base.inicializar();
+    base.imprimir();
+    base.selectionSort();
+    base.imprimir();
     cout << endl;
 
+    cout << base.factorial(4);
     return 0;
 }
