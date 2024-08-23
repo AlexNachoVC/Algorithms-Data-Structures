@@ -2,17 +2,29 @@
 
 using namespace std;
 
-#define SIZE 20
-
 class Base {
 private:
-    int arreglo[SIZE];
+    int *arreglo;
+    int size;
+    void merge(int left, int mid, int right);
+    void mergeSort(int left, int right);
 
 public:
+    Base();
+    ~Base();
+    void setSize(int newSize);
     void inicializar();
     void imprimir();
+    
+    //O(n^2)
     void bubbleSort();
+
+    //O(n^2)
     void insertionSort();
+
+    //O(n^2)
     void selectionSort();
-    int factorial(int n);
+
+    //O(n log(n))
+    void mergeSortExecute();
 };
