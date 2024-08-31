@@ -8,6 +8,8 @@ private:
     int size;
     void merge(int left, int mid, int right);
     void mergeSort(int left, int right);
+    int partition(int start, int end);
+    void quickSort(int start, int end);
 
 public:
     Base();
@@ -27,4 +29,8 @@ public:
 
     //O(n log(n))
     void mergeSortExecute();
+
+    void quickSortExecute();
+
+    
 };

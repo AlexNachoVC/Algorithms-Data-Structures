@@ -142,3 +142,44 @@ void Base::mergeSort(int left, int right) {
 void Base::mergeSortExecute() {
     mergeSort(0, size - 1);
 }
+
+int Base::partition(int start, int end) {
+    int pivot = arreglo[end];
+    int leftWall = start - 1;
+    int tmp;
+
+    for (int i = start; i < end; i++) {
+        if (arreglo[i] < pivot) {
+            leftWall++;
+            tmp = arreglo[leftWall];
+            arreglo[leftWall] = arreglo[i];
+            arreglo[i] = tmp;
+        }
+    }
+    leftWall++;
+    tmp = arreglo[leftWall];
+    arreglo[leftWall] = arreglo[end];
+    arreglo[end] = tmp;
+
+    return leftWall; 
+}
+
+void Base::quickSort(int start, int end) {
+    if (start >= end) {
+        return;
+    }
+
+    int pivotIdx = partition(start, end);
+
+    quickSort(start, pivotIdx - 1);
+    quickSort(pivotIdx + 1, end);
+}
+
+void Base::quickSortExecute() {
+    if (size > 0) {
+        quickSort(0, size - 1);
+    }
+}
+
+
+}
