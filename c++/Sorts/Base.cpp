@@ -181,5 +181,26 @@ void Base::quickSortExecute() {
     }
 }
 
+int Base::binarySearch(int valor) {
+    int inicio = 0;
+    int fin = size;
+    int mitad;
 
+    while (inicio < fin) {
+        mitad = (inicio + fin) / 2;
+
+        if (valor == mitad) {
+            return mitad;
+        }
+        
+        else if (valor < mitad) {
+            fin = mitad - 1;
+        }
+
+        else {
+            inicio = mitad + 1;
+        }
+    }
+
+    return -1;
 }

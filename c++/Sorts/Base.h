@@ -32,5 +32,5 @@ public:
 
     void quickSortExecute();
 
-    
+    int binarySearch(int valor);
 };

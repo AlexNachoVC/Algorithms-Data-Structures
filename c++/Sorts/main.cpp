@@ -16,7 +16,7 @@ int main() {
 
     while (opcion != 6) {
         cout << "\nElija una opcion para el sort: ";
-        cout << "\n1) Bubble Sort\n" << "2) Insertion Sort\n" << "3) Selection Sort\n" << "4) Merge Sort\n" <<  "5) Quick Sort\n"  << "7) Salir\n";
+        cout << "\n1) Bubble Sort\n" << "2) Insertion Sort\n" << "3) Selection Sort\n" << "4) Merge Sort\n" <<  "5) Quick Sort\n" << "6) Binary Search\n" << "7) Salir\n";
         cin >> opcion;
     
         switch (opcion) {
@@ -50,7 +50,19 @@ int main() {
                 base.quickSortExecute();
                 cout << "\nEl arreglo ordenado por Quick Sort es:" << endl;
                 break;    
-                   
+            case 6:
+                cout << "Ingresa el elemento a buscar : \n";
+                cin >> elemento;
+                base.quickSortExecute();
+                int resultado;
+                resultado = base.binarySearch(elemento);
+                if (resultado != -1) {
+                    cout << "Elemento encontrado en la posicion: " << resultado << endl;
+                }
+                else {
+                    cout << "Elemento no encontrado en el arreglo" << endl;
+                }
+                break;        
             case 7:
                 cout << "\nSaliendo..." << endl;
                 return 0;
