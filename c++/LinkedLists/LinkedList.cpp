@@ -47,3 +47,13 @@ void LinkedList::printList() {
     cout << "\n";
 }
 
+void LinkedList::deleteLinkedList() {
+    if (!head) {
+        return;
+    }
+    while (head) {
+        Node *tmp = head;
+        head = head->next;
+        delete tmp;
+    }
+}

@@ -16,7 +16,8 @@ int main() {
     }
 
     linkedList.printList();
-    
+    linkedList.deleteLinkedList();
+    linkedList.printList();
     return 0;
 
 }
