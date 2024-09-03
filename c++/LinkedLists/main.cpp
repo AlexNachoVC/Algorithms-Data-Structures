@@ -7,5 +7,16 @@ using namespace std;
 
 int main() {
     LinkedList linkedList;
+    
+    for (int i = 0; i < MAX_DATA; i++) {
+        if(!linkedList.insertAtEnd(i)) {
+            cout << "No hubo memoria\n";
+            return 0;
+        }
+    }
+
+    linkedList.printList();
+    
+    return 0;
 
 }

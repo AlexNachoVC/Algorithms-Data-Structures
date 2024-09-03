@@ -14,5 +14,7 @@ private:
 public:
     LinkedList();
     ~LinkedList();
+    bool insertAtEnd(int value);
+    void printList();
 
 };
