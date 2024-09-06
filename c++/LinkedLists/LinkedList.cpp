@@ -57,3 +57,33 @@ void LinkedList::deleteLinkedList() {
         delete tmp;
     }
 }
+
+bool LinkedList::deleteElement(int element) {
+    if (!head) {
+        return false;
+    }
+
+    if (head->dato == element) {
+        Node *tmp = head;
+        head = head->next;
+        delete tmp;
+        return true;
+    }
+
+    Node *current = head;
+    Node *previous = nullptr;
+
+    while (current && current->dato != element) {
+        previous = current;
+        current = current->next;
+    }
+
+    if (!current) {
+        return false;
+    }
+
+    previous->next = current->next;
+    delete current;
+    return true;
+
+}

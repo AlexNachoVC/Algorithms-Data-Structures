@@ -17,4 +17,5 @@ public:
     bool insertAtEnd(int value);
     void printList();
     void deleteLinkedList();
+    bool deleteElement(int element);
 };
