@@ -15,6 +15,8 @@ public:
     LinkedList();
     ~LinkedList();
     bool insertAtEnd(int value);
+    bool insertAtBeginning(int value);
+    
     void printList();
     void deleteLinkedList();
     bool deleteElement(int element);

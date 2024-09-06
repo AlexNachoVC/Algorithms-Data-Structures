@@ -16,8 +16,11 @@ int main() {
     }
 
     linkedList.printList();
-
+    linkedList.insertAtBeginning(0);
+    linkedList.printList();
     linkedList.deleteElement(5);
+    linkedList.printList();
+    linkedList.insertOnOrder(13);
     linkedList.printList();
 
     return 0;

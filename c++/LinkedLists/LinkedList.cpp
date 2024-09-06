@@ -37,6 +37,20 @@ bool LinkedList::insertAtEnd(int value) {
     return true;
 }
 
+bool LinkedList::insertAtBeginning(int value) {
+    Node *newNode = new(nothrow) Node;
+    if (!newNode) {
+        return false;
+    }
+
+    newNode->dato = value;
+    newNode->next = head;
+    head = newNode;
+    return true;
+}
+
+
+
 void LinkedList::printList() {
     Node *tmp = head;
 
