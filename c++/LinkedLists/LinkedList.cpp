@@ -49,7 +49,37 @@ bool LinkedList::insertAtBeginning(int value) {
     return true;
 }
 
+bool LinkedList::insertOnOrder(int value) {
+    Node *newNode = nullptr;
+    newNode = new (nothrow) Node;
 
+    if (!newNode) {
+        return false;
+    }
+
+    newNode->dato = value;
+    newNode->next = nullptr;
+
+    if (!head) {
+        head = newNode;
+        return true;
+    }
+
+    if (value < head->dato) {
+        newNode->next = head;
+        head = newNode;
+        return true;
+    }
+
+    Node *current = head;
+    while (current->next && current->next->dato < value) {
+        current = current->next;
+    }
+
+    newNode->next = current->next;
+    current->next = newNode;
+    return true;
+}
 
 void LinkedList::printList() {
     Node *tmp = head;
