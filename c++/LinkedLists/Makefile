@@ -11,3 +11,6 @@ LinkedList.o: LinkedList.cpp LinkedList.h
 
 clean: 
 	rm *.o main
+
+valgrind: main
+	valgrind --leak-check=full ./main
