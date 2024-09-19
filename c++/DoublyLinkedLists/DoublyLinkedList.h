@@ -5,6 +5,8 @@ public:
     int data;
     Node *prev;
     Node *next;
+
+    Node();
 };
 
 class DoublyLinkedList {
@@ -22,5 +24,6 @@ public:
     bool deleteAtBeginning(int value);
     bool deleteAtEnd(int value);
     bool deleteAt(int value, int position);
+    void deleteLinkedList();
     void printList();
 };
