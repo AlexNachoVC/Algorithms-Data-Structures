@@ -6,7 +6,7 @@ public:
     Node *prev;
     Node *next;
 
-    Node();
+    Node(int data);
 };
 
 class DoublyLinkedList {
