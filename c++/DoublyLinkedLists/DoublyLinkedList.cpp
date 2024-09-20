@@ -25,7 +25,7 @@ bool DoublyLinkedList::prepend(int value) {
     }
 
     if (!head) {
-        head = newNode;
+        head = tail = newNode;
         return true;
     }
 
@@ -42,7 +42,7 @@ bool DoublyLinkedList::append(int value) {
     }
 
     if (!tail) {
-        tail = newNode;
+        tail = head = newNode;
         return true;
     }
 
@@ -97,12 +97,13 @@ bool DoublyLinkedList::insertOnOrder(int value) {
     newNode->next = nullptr;
 
     if (!head) {
-        head = newNode;
+        head = tail = newNode;
         return true;
     }
 
     if (value < head->data) {
         newNode->next = head;
+        head->prev = newNode;
         head = newNode;
         return true;
     }
@@ -113,6 +114,14 @@ bool DoublyLinkedList::insertOnOrder(int value) {
     }
 
     newNode->next = current->next;
+    newNode->prev = current;
+
+    if (current->next) {
+        current->next->prev = newNode;
+    } else {
+        tail = newNode;
+    }
+
     current->next = newNode;
     return true;
 }
