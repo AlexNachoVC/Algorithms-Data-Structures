@@ -23,7 +23,7 @@ public:
     bool deleteElement(int element); 
     bool deleteAtBeginning();
     bool deleteAtEnd();
-    bool deleteAt(int value, int position);
+    bool deleteAt(int position);
     void deleteLinkedList();
     void printList();
 };

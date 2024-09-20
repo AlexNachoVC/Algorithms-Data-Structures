@@ -58,8 +58,7 @@ bool DoublyLinkedList::insertAt(int value, int position) {
     }
 
     if (position == 1) {
-        prepend(value);
-        return true;
+        return prepend(value);
     }
 
     Node *newNode = new(nothrow) Node(value);
@@ -197,6 +196,36 @@ bool DoublyLinkedList::deleteAtEnd() {
         tail->next = nullptr;
     } else {
         head = nullptr;
+    }
+
+    delete tmp;
+    return true;
+}
+
+bool DoublyLinkedList::deleteAt(int position) {
+    if (!head || position < 1) {
+        return false;
+    }
+
+    if (position == 1) {
+        return deleteAtBeginning();
+    }
+
+    Node *tmp = head;
+
+    for (int i = 1; tmp != nullptr && i < position; i++) {
+        tmp = tmp->next;
+    }
+
+    if (tmp == nullptr) {
+        return false;
+    }
+
+    if (tmp->next != nullptr) {
+        tmp->next->prev = tmp->prev;
+    }
+    if (tmp->prev != nullptr) {
+        tmp->prev->next = tmp->next;
     }
 
     delete tmp;
