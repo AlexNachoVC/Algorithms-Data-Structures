@@ -126,4 +126,44 @@ bool DoublyLinkedList::insertOnOrder(int value) {
     return true;
 }
 
+bool DoublyLinkedList::deleteElement(int element) {
+    if (!head) {
+        return false;
+    }
+
+    if (head->data == element) {
+        Node *tmp = head;
+        head = head->next;
+        if (head) {
+            head->prev = nullptr;
+        } else {
+            tail = nullptr;
+        }
+        delete tmp;
+        return true;
+    }
+
+    Node *current = head;
+
+    while (current && current->data != element) {
+        current = current->next;
+    }
+
+    if (!current) {
+        return false;
+    }
+
+    if (current->next) {
+        current->next->prev = current->prev;
+    } else {
+        tail = current->prev;
+    }
+
+    if (current->prev) {
+        current->prev->next = current->next;
+    }
+    
+    delete current;
+    return true;
+}
 

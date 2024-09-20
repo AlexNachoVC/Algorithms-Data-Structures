@@ -20,7 +20,7 @@ public:
     bool append(int value);
     bool insertAt(int value, int position);
     bool insertOnOrder(int value);
-    bool deleteElement(int value); 
+    bool deleteElement(int element); 
     bool deleteAtBeginning(int value);
     bool deleteAtEnd(int value);
     bool deleteAt(int value, int position);
