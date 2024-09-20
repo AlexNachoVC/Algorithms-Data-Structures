@@ -21,8 +21,8 @@ public:
     bool insertAt(int value, int position);
     bool insertOnOrder(int value);
     bool deleteElement(int element); 
-    bool deleteAtBeginning(int value);
-    bool deleteAtEnd(int value);
+    bool deleteAtBeginning();
+    bool deleteAtEnd();
     bool deleteAt(int value, int position);
     void deleteLinkedList();
     void printList();

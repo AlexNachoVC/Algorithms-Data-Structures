@@ -162,8 +162,25 @@ bool DoublyLinkedList::deleteElement(int element) {
     if (current->prev) {
         current->prev->next = current->next;
     }
-    
+
     delete current;
     return true;
 }
 
+bool DoublyLinkedList::deleteAtBeginning() {
+    if (!head) {
+        return false;
+    }
+
+    Node *tmp = head;
+    head = head->next;
+
+    if (head != nullptr) {
+        head->prev = nullptr;
+    } else {
+        tail = nullptr;
+    }
+
+    delete tmp;
+    return true;
+}
