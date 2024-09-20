@@ -231,3 +231,15 @@ bool DoublyLinkedList::deleteAt(int position) {
     delete tmp;
     return true;
 }
+
+void DoublyLinkedList::deleteLinkedList() {
+    while (head) {
+        Node *tmp = head;
+        head = head->next;
+        if (head) {
+            head->prev = nullptr;
+        }
+        delete tmp;
+    }
+    tail = nullptr;
+}
