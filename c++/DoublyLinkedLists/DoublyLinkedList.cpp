@@ -243,3 +243,31 @@ void DoublyLinkedList::deleteLinkedList() {
     }
     tail = nullptr;
 }
+
+void DoublyLinkedList::printListForwards() {
+    if (!head) {
+        return;
+    }
+
+    Node *tmp = head;
+
+    while (tmp) {
+        cout << tmp->data << " ";
+        tmp = tmp->next;
+    }
+    cout << "\n";
+}
+
+void DoublyLinkedList::printListBackwards() {
+    if (!head) {
+        return;
+    }
+
+    Node *tmp = tail;
+
+    while (tmp) {
+        cout << tmp->data << " ";
+        tmp = tmp->prev;
+    }
+    cout << "\n";
+}

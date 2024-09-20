@@ -25,5 +25,6 @@ public:
     bool deleteAtEnd();
     bool deleteAt(int position);
     void deleteLinkedList();
-    void printList();
+    void printListForwards();
+    void printListBackwards();
 };
