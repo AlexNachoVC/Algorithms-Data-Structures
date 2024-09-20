@@ -184,3 +184,21 @@ bool DoublyLinkedList::deleteAtBeginning() {
     delete tmp;
     return true;
 }
+
+bool DoublyLinkedList::deleteAtEnd() {
+    if (!head) {
+        return false;
+    }
+
+    Node *tmp = tail;
+    tail = tail->prev;
+
+    if (tail != nullptr) {
+        tail->next = nullptr;
+    } else {
+        head = nullptr;
+    }
+
+    delete tmp;
+    return true;
+}
