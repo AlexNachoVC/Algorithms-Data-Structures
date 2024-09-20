@@ -15,7 +15,7 @@ DoublyLinkedList::DoublyLinkedList() {
 }
 
 DoublyLinkedList::~DoublyLinkedList() {
-
+    deleteLinkedList();
 }
 
 bool DoublyLinkedList::prepend(int value) {
