@@ -11,7 +11,7 @@ public:
     Node<T> *prev;
     Node<T> *next;
 
-    Node::Node(T data) {
+    Node(T data) {
         this->data = data;
         this->prev = nullptr;
         this->next = nullptr;
@@ -24,16 +24,16 @@ private:
     Node<T> *head;
     Node<T> *tail;
 public: 
-    DoublyLinkedList::DoublyLinkedList() {
+    DoublyLinkedList() {
     head = nullptr;
     tail = nullptr;
     }
 
-    DoublyLinkedList::~DoublyLinkedList() {
+    ~DoublyLinkedList() {
         deleteLinkedList();
     }
 
-    bool DoublyLinkedList::prepend(T value) {
+    bool prepend(T value) {
         Node<T> *newNode = new(nothrow) Node<T>(value);
         if (!newNode) {
             return false;
@@ -50,7 +50,7 @@ public:
         return true;
     }
 
-    bool DoublyLinkedList::append(T value) {
+    bool append(T value) {
         Node<T> *newNode = new(nothrow) Node<T>(value);
         if (!newNode) {
             return false;
@@ -67,7 +67,7 @@ public:
         return true;
     }
 
-    bool DoublyLinkedList::insertAt(T value, int position) {
+    bool insertAt(T value, int position) {
         if (position < 1) {
             return false;
         }
@@ -100,7 +100,7 @@ public:
         return true;
     }
 
-    bool DoublyLinkedList::insertOnOrder(T value) {
+    bool insertOnOrder(T value) {
         Node<T> *newNode = nullptr;
         newNode = new (nothrow) Node(value);
 
@@ -140,7 +140,7 @@ public:
         return true;
     }
 
-    bool DoublyLinkedList::deleteElement(T element) {
+    bool deleteElement(T element) {
         if (!head) {
             return false;
         }
@@ -181,7 +181,7 @@ public:
         return true;
     }
 
-    bool DoublyLinkedList::deleteAtBeginning() {
+    bool deleteAtBeginning() {
         if (!head) {
             return false;
         }
@@ -199,7 +199,7 @@ public:
         return true;
     }
 
-    bool DoublyLinkedList::deleteAtEnd() {
+    bool deleteAtEnd() {
         if (!head) {
             return false;
         }
@@ -217,7 +217,7 @@ public:
         return true;
     }
 
-    bool DoublyLinkedList::deleteAt(int position) {
+    bool deleteAt(int position) {
         if (!head || position < 1) {
             return false;
         }
@@ -247,7 +247,7 @@ public:
         return true;
     }
 
-    void DoublyLinkedList::deleteLinkedList() {
+    void deleteLinkedList() {
         while (head) {
             Node<T> *tmp = head;
             head = head->next;
@@ -259,7 +259,7 @@ public:
         tail = nullptr;
     }
 
-    void DoublyLinkedList::printListForwards() {
+    void printListForwards() {
         if (!head) {
             return;
         }
@@ -273,7 +273,7 @@ public:
         cout << "\n";
     }
 
-    void DoublyLinkedList::printListBackwards() {
+    void printListBackwards() {
         if (!head) {
             return;
         }

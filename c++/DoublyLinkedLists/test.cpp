@@ -35,4 +35,6 @@ int main() {
     DLL.printListBackwards();
     DLL.deleteLinkedList();
     DLL.printListForwards();
+
+    return 0;
 }
