@@ -19,4 +19,5 @@ public:
     bool enqueue(int value);
     bool deque();
     int peek();
+    void printQueue();
 };

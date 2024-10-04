@@ -55,3 +55,13 @@ int Queue::peek() {
     }
     throw runtime_error("Queue is empty");
 }
+
+void Queue::printQueue() {
+    Node *curr = head;
+
+    while (curr) {
+        cout << curr->Data << " ";
+        curr = curr->next;
+    }
+    cout << "\n";
+}
