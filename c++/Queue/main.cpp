@@ -1,11 +1,11 @@
-#include "Queue.h"
+#include "Queue.hpp"
 
 #include <iostream>
 
 using namespace std;
 
 int main() {
-    Queue q;
+    Queue<int> q;
     
     for (int i = 0; i < 10; i++) {
         q.enqueue(i);

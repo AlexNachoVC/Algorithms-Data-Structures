@@ -1,13 +1,10 @@
 CXXFLAGS = -g -Wall --pedantic
 
-main: main.o Queue.o
-	g++ $(CXXFLAGS) main.o Queue.o -o main
+main: main.o
+	g++ $(CXXFLAGS) main.o -o main
 
-main.o: main.cpp
+main.o: main.cpp Queue.hpp
 	g++ -c $(CXXFLAGS) main.cpp
-
-Queue.o: Queue.cpp Queue.h
-	g++ -c $(CXXFLAGS) Queue.cpp
 
 clean: 
 	rm *.o main
