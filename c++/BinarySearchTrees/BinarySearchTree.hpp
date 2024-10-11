@@ -27,7 +27,28 @@ private:
         }
         return &curr->info;
     }
-    
+
+    bool recursiveInsert(TreeNode<T> &*node, T data) {
+        if (!node) {
+            node = new(nothrow) TreeNode<T>(data);
+            if (!node) {
+                return false;
+            }
+            return true;
+        }
+
+        if (data < node->info) {
+            return recursiveInsert(node->left, data);
+        }
+        else if (dato > node->info) {
+            return recursiveInsert(node->right, data);
+        }
+
+        // El dato ya existe en el arbol, no se permite duplicados
+        // si deseamos incluir duplicados, cambiar arriba "<" por "<="
+        return false;
+    }
+
 public:
     BST() {
         root = nullptr;
@@ -41,6 +62,10 @@ public:
 
     T* search(T data) {
         return(recursiveSearch(root, data));
+    }
+
+    bool insert(T dato) {
+        return(recursiveInsert(root, data));
     }
 
 };
