@@ -1,5 +1,6 @@
 #pragma once
 
+using namespace std;
 template <typename T>
 class TreeNode {
 public:
@@ -19,16 +20,16 @@ private:
         if (!curr) {
             return nullptr;
         }
-        if (dato < curr->info) {
+        if (data < curr->info) {
             return(recursiveSearch(curr->left, data));
         }
-        else if (dato > curr->info) {
-            return(recursiveSearch(curr->right, data))
+        else if (data > curr->info) {
+            return(recursiveSearch(curr->right, data));
         }
         return &curr->info;
     }
 
-    bool recursiveInsert(TreeNode<T> &*node, T data) {
+    bool recursiveInsert(TreeNode<T> *&node, T data) {
         if (!node) {
             node = new(nothrow) TreeNode<T>(data);
             if (!node) {
@@ -40,13 +41,41 @@ private:
         if (data < node->info) {
             return recursiveInsert(node->left, data);
         }
-        else if (dato > node->info) {
+        else if (data > node->info) {
             return recursiveInsert(node->right, data);
         }
 
         // El dato ya existe en el arbol, no se permite duplicados
         // si deseamos incluir duplicados, cambiar arriba "<" por "<="
         return false;
+    }
+    void walkInOrder(TreeNode<T>* curr) {
+        if (curr == nullptr) {
+            return;
+        }
+        walkInOrder(curr->left);
+        cout << curr->info << " ";
+        walkInOrder(curr->right);
+    }
+
+    void walkPreOrder(TreeNode<T>* curr) {
+        if (curr == nullptr) {
+            return;
+        }
+        
+        cout << curr->info << " ";
+        walkPreOrder(curr->left);
+        walkPreOrder(curr->right);
+    }
+
+    void walkPostOrder(TreeNode<T>* curr) {
+        if (curr == nullptr) {
+            return;
+        }
+
+        walkPostOrder(curr->left);
+        walkPostOrder(curr->right);
+        cout << curr->info << " ";
     }
 
 public:
@@ -58,14 +87,30 @@ public:
         deleteBST();
     }
 
-    bool deleteBST();
+    bool deleteBST() {
+        
+    };
 
     T* search(T data) {
         return(recursiveSearch(root, data));
     }
 
-    bool insert(T dato) {
+    bool insert(T data) {
         return(recursiveInsert(root, data));
     }
 
+    void printInOrder() {
+        walkInOrder(root);
+        cout << endl;
+    }
+
+    void printPreOrder() {
+        walkPreOrder(root);
+        cout << endl;
+    }
+
+    void printPostOrder() {
+        walkPostOrder(root);
+        cout << endl;
+    }
 };

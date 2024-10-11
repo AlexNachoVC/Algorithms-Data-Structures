@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
 	int 				option = 0;
-	ArbolBinario<int>	arbol;
+	BST<int>	BST;
 
 	do {
 		cout << "Elije una opcion:" << endl;
@@ -41,7 +41,7 @@ int main() {
                     option = -1;
                 }
 				else {
-					if(arbol.inserta(dato))
+					if(BST.insert(dato))
 						cout << "Valor insertado" << endl;
 					else   
 						cout << "Error al insertar nuevo valor" << endl;
@@ -49,16 +49,16 @@ int main() {
 				break;
 			}
 			case 2:
-				arbol.imprimeInOrder();
+				BST.printInOrder();
 				break;
 			case 3:
-				arbol.imprimePreOrder();
+				BST.printPreOrder();
 				break;
 			case 4:
-				arbol.imprimePostOrder();
+				BST.printPostOrder();
 				break;
 		    case 5:
-				arbol.borrarArbol();
+				BST.deleteBST();
 				break;
 			case OPCION_SALIDA:
 				break;
