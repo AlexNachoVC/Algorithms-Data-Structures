@@ -16,7 +16,8 @@ int main() {
 		cout << "2) Imprimir In Order" << endl;
 		cout << "3) Imprimir Pre Order" << endl;
 		cout << "4) Imprimir Post Order" << endl;
-		cout << "5) Borrar Todo" << endl << endl;
+		cout << "5) Imprimir BFS" << endl;
+		cout << "6) Borrar Todo" << endl << endl;
 		
 		cout << "0) Salir" << endl;
 
@@ -57,7 +58,10 @@ int main() {
 			case 4:
 				BST.printPostOrder();
 				break;
-		    case 5:
+			case 5:
+				BST.bfs();
+				break;
+		    case 6:
 				BST.deleteBST();
 				break;
 			case OPCION_SALIDA:

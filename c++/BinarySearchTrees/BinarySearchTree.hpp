@@ -1,5 +1,5 @@
 #pragma once
-#include "c++/Queue/Queue.hpp"
+#include "../Queue/Queue.hpp"
 
 using namespace std;
 template <typename T>
@@ -173,5 +173,28 @@ public:
         recursiveRemove(root, data);
     }
 
-    
+    void bfs() {
+        Queue<TreeNode<T>*> queue;
+        if (root == nullptr) {
+            return;
+        }
+
+        queue.enqueue(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode<T>** tmp = queue.peek();
+            TreeNode<T>* curr = *tmp;
+            queue.deque();
+
+            cout << curr->info << " ";
+
+            if (curr->left != nullptr) {
+                queue.enqueue(curr->left);
+            }
+            if (curr->right != nullptr) {
+                queue.enqueue(curr->right);
+            }
+        }
+        cout << endl;
+    }
 };
