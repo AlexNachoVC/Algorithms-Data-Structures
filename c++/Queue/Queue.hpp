@@ -10,7 +10,7 @@ public:
     T Data;
     Node<T> *next;
 
-    Node(int value) {
+    Node(T value) {
         Data = value;
         next = nullptr;
     }
@@ -66,9 +66,9 @@ public:
         return true;
     }
 
-    int peek() {
+    T* peek() {
         if (head != nullptr) {
-            return head->Data;
+            return &head->Data;
         }
         throw runtime_error("Queue is empty");
     }
