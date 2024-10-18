@@ -58,7 +58,9 @@ public:
 
         Node<T> *tmp = head;
         head = head->next;
-        tmp->next = nullptr;
+        if (!head) {
+            tail = nullptr;
+        }
         delete tmp;
 
         return true;
