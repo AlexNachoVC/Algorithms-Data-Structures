@@ -78,6 +78,50 @@ private:
         cout << curr->info << " ";
     }
 
+    bool recursiveRemove(TreeNode<T> *& root, T data) {
+        if (root == nullptr) {
+            return false;
+        }
+        else if (data < root->info) {
+            recursiveRemove(root->left, data);
+        }
+        else if (data > root->info) {
+            recursiveRemove(root->right, data);
+        }
+        else {
+            if (root->left == nullptr && root->right == nullptr) {
+                delete root;
+                root = nullptr;
+                return true;
+            }
+            else if (root->left == nullptr) {
+                TreeNode<T> *tmp = root;
+                root = root->right;
+                delete tmp;
+                return true;
+            }
+            else if (root->right == nullptr) {
+                TreeNode<T> *tmp = root;
+                root = root->left;
+                delete tmp;
+                return true;
+            }
+            else {
+                TreeNode<T> *tmp = findMin(root->right);
+                root->info = tmp->info;
+                return recursiveRemove(root->right, tmp->info);
+            }
+        }
+    }
+
+    TreeNode<T>* findMin(TreeNode<T> *root) {
+        while (root->left != nullptr) {
+            root = root->left;
+        }
+        return root;
+    }
+
+
 public:
     BST() {
         root = nullptr;
@@ -112,5 +156,9 @@ public:
     void printPostOrder() {
         walkPostOrder(root);
         cout << endl;
+    }
+
+    void remove(T data) {
+        recursiveRemove(root, data);
     }
 };
