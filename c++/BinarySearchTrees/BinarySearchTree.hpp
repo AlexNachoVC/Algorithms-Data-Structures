@@ -121,6 +121,15 @@ private:
         return root;
     }
 
+    void deletePostOrder(TreeNode<T> *curr) {
+        if (curr == nullptr) {
+            return;
+        }
+        deletePostOrder(curr->left);
+        deletePostOrder(curr->right);
+        delete curr;
+    }
+
 
 public:
     BST() {
@@ -131,8 +140,9 @@ public:
         deleteBST();
     }
 
-    bool deleteBST() {
-        
+    void deleteBST() {
+       deletePostOrder(root);
+       root = nullptr;
     };
 
     T* search(T data) {
