@@ -1,4 +1,5 @@
 #pragma once
+#include "c++/Queue/Queue.hpp"
 
 using namespace std;
 template <typename T>
@@ -171,4 +172,6 @@ public:
     void remove(T data) {
         recursiveRemove(root, data);
     }
+
+    
 };

@@ -82,4 +82,8 @@ public:
         }
         cout << "\n";
     }
+
+    bool isEmpty() {
+        return head == nullptr;
+    }
 };
