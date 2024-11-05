@@ -3,21 +3,22 @@
 
 using namespace std;
 template <typename T>
-class TreeNode {
+class AVLNode {
 public:
     T info;
-    TreeNode<T> *left;
-    TreeNode<T> *right;
+    int height;
+    AVLNode<T> *left;
+    AVLNode<T> *right;
 
-    TreeNode(T data) : info(data), left(nullptr), right(nullptr) {}
+    AVLNode(T data) : info(data), height(0), left(nullptr), right(nullptr) {}
 };
 
 template <typename T>
 class AVL {
 private:
-    TreeNode<T> *root;
+    AVLNode<T> *root;
 
-    T* recursiveSearch(TreeNode<T> *curr, T data) {
+    T* recursiveSearch(AVLNode<T> *curr, T data) {
         if (!curr) {
             return nullptr;
         }
@@ -30,9 +31,9 @@ private:
         return &curr->info;
     }
 
-    bool recursiveInsert(TreeNode<T> *&node, T data) {
+    bool recursiveInsert(AVLNode<T> *&node, T data) {
         if (!node) {
-            node = new(nothrow) TreeNode<T>(data);
+            node = new(nothrow) AVLNode<T>(data);
             if (!node) {
                 return false;
             }
@@ -50,7 +51,7 @@ private:
         // si deseamos incluir duplicados, cambiar arriba "<" por "<="
         return false;
     }
-    void walkInOrder(TreeNode<T>* curr) {
+    void walkInOrder(AVLNode<T>* curr) {
         if (curr == nullptr) {
             return;
         }
@@ -59,7 +60,7 @@ private:
         walkInOrder(curr->right);
     }
 
-    void walkPreOrder(TreeNode<T>* curr) {
+    void walkPreOrder(AVLNode<T>* curr) {
         if (curr == nullptr) {
             return;
         }
@@ -69,7 +70,7 @@ private:
         walkPreOrder(curr->right);
     }
 
-    void walkPostOrder(TreeNode<T>* curr) {
+    void walkPostOrder(AVLNode<T>* curr) {
         if (curr == nullptr) {
             return;
         }
@@ -79,7 +80,7 @@ private:
         cout << curr->info << " ";
     }
 
-    bool recursiveRemove(TreeNode<T> *& root, T data) {
+    bool recursiveRemove(AVLNode<T> *& root, T data) {
         if (root == nullptr) {
             return false;
         }
@@ -96,33 +97,33 @@ private:
                 return true;
             }
             else if (root->left == nullptr) {
-                TreeNode<T> *tmp = root;
+                AVLNode<T> *tmp = root;
                 root = root->right;
                 delete tmp;
                 return true;
             }
             else if (root->right == nullptr) {
-                TreeNode<T> *tmp = root;
+                AVLNode<T> *tmp = root;
                 root = root->left;
                 delete tmp;
                 return true;
             }
             else {
-                TreeNode<T> *tmp = findMin(root->right);
+                AVLNode<T> *tmp = findMin(root->right);
                 root->info = tmp->info;
                 return recursiveRemove(root->right, tmp->info);
             }
         }
     }
 
-    TreeNode<T>* findMin(TreeNode<T> *root) {
+    AVLNode<T>* findMin(AVLNode<T> *root) {
         while (root->left != nullptr) {
             root = root->left;
         }
         return root;
     }
 
-    void deletePostOrder(TreeNode<T> *curr) {
+    void deletePostOrder(AVLNode<T> *curr) {
         if (curr == nullptr) {
             return;
         }
@@ -131,6 +132,93 @@ private:
         delete curr;
     }
 
+    AVLNode<T>* rightRotate(AVLNode<T>* y) {
+        AVLNode<T> *x = y->left;
+        AVLNode<T> *T2 = x->right;
+
+        x->right = y;
+        y->left = T2;
+
+        calculateHeight(y);
+        calculateHeight(x);
+        
+        return x;
+    }
+
+    AVLNode<T>* leftRotate(AVLNode<T>* x) {
+        AVLNode<T> *y = x->right;
+        AVLNode<T> *T2 = y->left;
+
+        y->left = x;
+        x->right = T2;
+
+        calculateHeight(x);
+        calculateHeight(y);
+        
+        return y;
+    }
+
+    AVLNode<T>* doubleRightRotate(AVLNode<T>* node) {
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
+    }
+
+    AVLNode<T>* doubleLeftRotate(AVLNode<T>* node) {
+        node->right = rightRotate(node->right);
+        return leftRotate(node);
+    }
+
+        // AVL
+
+    int getHeight(AVLNode<T> *node) {
+        if (!node) {
+            return -1;
+        }
+        return node->height;
+    }
+
+    int getBalance(AVLNode<T> *node) {
+        if (!node) {
+            return -1;
+        }
+        return getHeight(node->left) - getHeight(node->right);
+    }
+
+    void calculateHeight(AVLNode<T> *node) {
+        if (node) {
+            node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+        }
+    }
+
+    int checkBalance(AVLNode<T> *node) {
+        if (!node) {
+            return -1;
+        }
+        return getHeight(node->left) - getHeight(node->right);
+    }
+
+    void balance(AVLNode<T> *&node) {
+        int balance = checkBalance(node);
+
+        if (balance > 1){
+            int balanceLeft = checkBalance(node->left);
+            if (balanceLeft >= 0){
+                node = rightRotate(node);
+            }
+            else{
+                node = doubleRightRotate(node);
+            }
+        }
+        if (balance < -1){
+            int balanceRight = checkBalance(node->right); 
+            if (balanceRight <= 0){
+                node = leftRotate(node);
+            }
+            else{
+                node = doubleLeftRotate(node);
+            }
+        }
+    }
 
 public:
     AVL() {
@@ -174,7 +262,7 @@ public:
     }
 
     void bfs() {
-        Queue<TreeNode<T>*> queue;
+        Queue<AVLNode<T>*> queue;
         if (root == nullptr) {
             return;
         }
@@ -182,8 +270,8 @@ public:
         queue.enqueue(root);
 
         while (!queue.isEmpty()) {
-            TreeNode<T>** tmp = queue.peek();
-            TreeNode<T>* curr = *tmp;
+            AVLNode<T>** tmp = queue.peek();
+            AVLNode<T>* curr = *tmp;
             queue.deque();
 
             cout << curr->info << " ";
