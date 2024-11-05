@@ -41,10 +41,18 @@ private:
         }
 
         if (data < node->info) {
-            return recursiveInsert(node->left, data);
+            if (recursiveInsert(node->left, data)) {
+                calculateHeight(node);
+                balance(node);
+                return true;
+            }
         }
         else if (data > node->info) {
-            return recursiveInsert(node->right, data);
+            if (recursiveInsert(node->right, data)) {
+                calculateHeight(node);
+                balance(node);
+                return true;
+            }
         }
 
         // El dato ya existe en el arbol, no se permite duplicados
@@ -85,35 +93,37 @@ private:
             return false;
         }
         else if (data < root->info) {
-            recursiveRemove(root->left, data);
+            if(!recursiveRemove(root->left, data)) {
+                return false;
+            }
         }
         else if (data > root->info) {
-            recursiveRemove(root->right, data);
+            if(!recursiveRemove(root->right, data)) {
+                return false;
+            }
         }
         else {
-            if (root->left == nullptr && root->right == nullptr) {
-                delete root;
-                root = nullptr;
-                return true;
-            }
-            else if (root->left == nullptr) {
-                AVLNode<T> *tmp = root;
+            AVLNode<T> *Delete = nullptr;
+
+            Delete = root;
+            if (!root->left) {
                 root = root->right;
-                delete tmp;
-                return true;
             }
-            else if (root->right == nullptr) {
-                AVLNode<T> *tmp = root;
+            else if (!root->right) {
                 root = root->left;
-                delete tmp;
-                return true;
             }
             else {
-                AVLNode<T> *tmp = findMin(root->right);
-                root->info = tmp->info;
-                return recursiveRemove(root->right, tmp->info);
+                Delete = findMin(root);
             }
+            delete Delete;
         }
+        
+        if (root) {
+            calculateHeight(root);
+            balance(root);
+        }
+
+        return true;  
     }
 
     AVLNode<T>* findMin(AVLNode<T> *root) {
@@ -131,6 +141,8 @@ private:
         deletePostOrder(curr->right);
         delete curr;
     }
+
+    // AVL
 
     AVLNode<T>* rightRotate(AVLNode<T>* y) {
         AVLNode<T> *x = y->left;
@@ -168,8 +180,6 @@ private:
         return leftRotate(node);
     }
 
-        // AVL
-
     int getHeight(AVLNode<T> *node) {
         if (!node) {
             return -1;
@@ -202,19 +212,21 @@ private:
 
         if (balance > 1){
             int balanceLeft = checkBalance(node->left);
+
             if (balanceLeft >= 0){
                 node = rightRotate(node);
             }
-            else{
+            else {
                 node = doubleRightRotate(node);
             }
         }
         if (balance < -1){
             int balanceRight = checkBalance(node->right); 
+
             if (balanceRight <= 0){
                 node = leftRotate(node);
             }
-            else{
+            else {
                 node = doubleLeftRotate(node);
             }
         }
