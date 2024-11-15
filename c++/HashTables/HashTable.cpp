@@ -34,7 +34,7 @@ unsigned int HashTable::hashX(int data) {
     for (unsigned int l = 0; l < len; l++) {
         hashValue = hashValue + name[l];
     }
-    return hashValue;
+    return hashValue % size;
 }
 
 unsigned int HashTable::hashToIndex(int hash) {
@@ -58,5 +58,12 @@ bool HashTable::remove(int data) {
 }
 
 int *HashTable::search(string name) {
+    unsigned int index = 0;
 
+    if (!table) {
+        return nullptr;
+    }
+
+    index = hashX(data);
+    return table[index].search(info);
 }
