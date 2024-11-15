@@ -41,10 +41,33 @@ public:
         return true;
         
     }
-    void deleteTable();
+
+    void deleteTable() {
+        if (!size) {
+            return;
+        }
+
+        if (table) {
+            delete [] table;
+            table = nullptr;
+            size = 0;
+        }
+    }
+    
     bool insert(int data);
     bool remove(int data);
-    T *search(T data);
+
+    T *search(T data) {
+        unsigned int index = 0;
+        
+        if (!table) {
+            return nullptr;
+        }
+
+        index = getIndex(data);
+        return (table[index].search(data));
+    }
+
     void print();
 
 };
