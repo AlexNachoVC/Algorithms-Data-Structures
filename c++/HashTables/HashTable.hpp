@@ -1,7 +1,6 @@
 #pragma once
 #include "../DoublyLinkedLists/DoublyLinkedListTemplate.hpp"
 
-
 template <typename T>
 class HashTable {
 private:
@@ -21,10 +20,11 @@ public:
     using HashFunction = unsigned int (*)(T&, unsigned int tableSize);
 
     HashTable() {
+        hashFunction = nullptr;
         table = nullptr;
         size = 0;
     }
-    ~HashTable() { deleteTable(); };
+    ~HashTable() { deleteTable(); }
 
     bool createTable(unsigned int nSize, HashFunction hashF) {
         if (!nSize || table || !hashFunction) {
@@ -54,7 +54,7 @@ public:
         }
     }
 
-    bool insert(int data) {
+    bool insert(T data) {
         unsigned int index = 0;
 
         if (!table) {
@@ -67,7 +67,8 @@ public:
         }
         return true;
     }
-    bool remove(int data) {
+    
+    bool remove(T data) {
         if (!table) {
             return false;
         }
