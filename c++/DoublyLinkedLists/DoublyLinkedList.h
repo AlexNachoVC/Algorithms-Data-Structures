@@ -1,18 +1,18 @@
 #pragma once
 
-class Node {
+class DLLNode {
 public:
     int data;
-    Node *prev;
-    Node *next;
+    DLLNode *prev;
+    DLLNode *next;
 
-    Node(int data);
+    DLLNode(int data);
 };
 
 class DoublyLinkedList {
 private: 
-    Node *head;
-    Node *tail;
+    DLLNode *head;
+    DLLNode *tail;
 public:
     DoublyLinkedList();
     ~DoublyLinkedList();

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Node::Node(int data) {
+DLLNode::DLLNode(int data) {
     this->data = data;
     this->prev = nullptr;
     this->next = nullptr;
@@ -19,7 +19,7 @@ DoublyLinkedList::~DoublyLinkedList() {
 }
 
 bool DoublyLinkedList::prepend(int value) {
-    Node *newNode = new(nothrow) Node(value);
+    DLLNode *newNode = new(nothrow) DLLNode(value);
     if (!newNode) {
         return false;
     }
@@ -36,7 +36,7 @@ bool DoublyLinkedList::prepend(int value) {
 }
 
 bool DoublyLinkedList::append(int value) {
-    Node *newNode = new(nothrow) Node(value);
+    DLLNode *newNode = new(nothrow) DLLNode(value);
     if (!newNode) {
         return false;
     }
@@ -61,12 +61,12 @@ bool DoublyLinkedList::insertAt(int value, int position) {
         return prepend(value);
     }
 
-    Node *newNode = new(nothrow) Node(value);
+    DLLNode *newNode = new(nothrow) DLLNode(value);
     if (!newNode) {
         return false;
     }
 
-    Node *tmp = head;
+    DLLNode *tmp = head;
 
     for (int i = 1; tmp != nullptr && i < position - 1; i++) {
         tmp = tmp->next;
@@ -86,8 +86,8 @@ bool DoublyLinkedList::insertAt(int value, int position) {
 }
 
 bool DoublyLinkedList::insertOnOrder(int value) {
-    Node *newNode = nullptr;
-    newNode = new (nothrow) Node(value);
+    DLLNode *newNode = nullptr;
+    newNode = new (nothrow) DLLNode(value);
 
     if (!newNode) {
         return false;
@@ -107,7 +107,7 @@ bool DoublyLinkedList::insertOnOrder(int value) {
         return true;
     }
 
-    Node *current = head;
+    DLLNode *current = head;
     while (current->next && current->next->data < value) {
         current = current->next;
     }
@@ -131,7 +131,7 @@ bool DoublyLinkedList::deleteElement(int element) {
     }
 
     if (head->data == element) {
-        Node *tmp = head;
+        DLLNode *tmp = head;
         head = head->next;
         if (head) {
             head->prev = nullptr;
@@ -142,7 +142,7 @@ bool DoublyLinkedList::deleteElement(int element) {
         return true;
     }
 
-    Node *current = head;
+    DLLNode *current = head;
 
     while (current && current->data != element) {
         current = current->next;
@@ -171,7 +171,7 @@ bool DoublyLinkedList::deleteAtBeginning() {
         return false;
     }
 
-    Node *tmp = head;
+    DLLNode *tmp = head;
     head = head->next;
 
     if (head != nullptr) {
@@ -189,7 +189,7 @@ bool DoublyLinkedList::deleteAtEnd() {
         return false;
     }
 
-    Node *tmp = tail;
+    DLLNode *tmp = tail;
     tail = tail->prev;
 
     if (tail != nullptr) {
@@ -211,7 +211,7 @@ bool DoublyLinkedList::deleteAt(int position) {
         return deleteAtBeginning();
     }
 
-    Node *tmp = head;
+    DLLNode *tmp = head;
 
     for (int i = 1; tmp != nullptr && i < position; i++) {
         tmp = tmp->next;
@@ -234,7 +234,7 @@ bool DoublyLinkedList::deleteAt(int position) {
 
 void DoublyLinkedList::deleteLinkedList() {
     while (head) {
-        Node *tmp = head;
+        DLLNode *tmp = head;
         head = head->next;
         if (head) {
             head->prev = nullptr;
@@ -249,7 +249,7 @@ void DoublyLinkedList::printListForwards() {
         return;
     }
 
-    Node *tmp = head;
+    DLLNode *tmp = head;
 
     while (tmp) {
         cout << tmp->data << " ";
@@ -263,7 +263,7 @@ void DoublyLinkedList::printListBackwards() {
         return;
     }
 
-    Node *tmp = tail;
+    DLLNode *tmp = tail;
 
     while (tmp) {
         cout << tmp->data << " ";

@@ -54,7 +54,7 @@ public:
         }
     }
 
-    bool insertEdge(unsigned int source, unsigned int destination) [
+    bool insertEdge(unsigned int source, unsigned int destination) {
         if (!vertexes) {
             return false;
         }
@@ -63,14 +63,30 @@ public:
             return false;
         }
 
-        if (vertexes[source].edges.)search(destination) {
+        if (vertexes[source].edges.search(destination)) {
             return false;
         }
-        
-        if (!vertexes[source].edges.append(destination)) {
+
+        return vertexes[source].edges.append(destination)) 
+    }
+
+    bool deleteEdge(unsigned int source, unsigned int destination) {
+        if (!vertexes) {
             return false;
         }
-        
-        return true;
-    ]
+
+        if (source >= size || destination >= size) {
+            return false;
+        }
+
+        return vertexes[source].edges.deleteElement(destination);
+    }
+
+    void printGraph() {
+        for (unsigned int i = 0; i < size; ++i) {
+            cout << "Vertex " << i << " (Data: " << vertexes[i].data << "):";
+            vertexes[i].edges.printListForwards();
+            cout << endl;
+        }
+    }
 };
