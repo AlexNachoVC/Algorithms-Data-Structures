@@ -11,7 +11,7 @@ private:
         if(!HashFunction) {
             return 0;
         }
-        return HashFunction(data, size);
+        return HashFunction(data, size) % size;
     }
 
     HashFunction hashFunction;

@@ -286,4 +286,13 @@ public:
         }
         cout << "\n";
     }
+
+    bool search(T value) {
+        Node<T> *curr = head;
+        while (curr != nullptr && curr->data != value) {
+            curr = curr->next;
+        }
+
+        return curr != nullptr;
+    }
 };
