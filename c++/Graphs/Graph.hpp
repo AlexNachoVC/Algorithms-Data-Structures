@@ -1,13 +1,18 @@
 #pragma once
-#include "../DoublyLinkedLists/DoublyLinkedListTemplate.hpp"
-#include "../Queue/Queue.hpp"
+#include "DoublyLinkedList.hpp"
+#include "Queue.hpp"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
 template <typename T>
 class Vertex {
 public:
     T data;
     DoublyLinkedList<unsigned int> edges;
     bool visited;
-    Vertex() : data(0), visited(false) {}
+    Vertex() : data(), visited(false) {}
 };
 
 template <typename T>
@@ -22,6 +27,15 @@ private:
         }
     }
 
+    bool isValidNumeric(const string& str) {
+		for (char c : str) {
+			if (!isdigit(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 public:
     Graph() {
         vertexes = nullptr;
@@ -31,18 +45,17 @@ public:
     ~Graph() { deleteGraph(); }
 
     bool createGraph(unsigned int nSize) {
-        if (nSize = 0 || vertexes != nullptr) {
+        if (nSize == 0 || vertexes != nullptr) {
             return false;
         }
 
-        vertexes = new (nothrow) Vertex<T>[nSize];
+        vertexes = new (std::nothrow) Vertex<T>[nSize];
         if (!vertexes) {
             return false;
         }
 
         size = nSize;
         for (unsigned int i = 0; i < size; ++i) {
-            vertexes[i].data = UINT32_MAX;
             vertexes[i].visited = false;
         }
 
@@ -60,6 +73,22 @@ public:
         }
     }
 
+    bool setVertex(unsigned int vertex, T data) { // aqui tengo problemas porque nunca se asigna (creo) el size del dungeon. asi que siempre lo toma como false, y tengo que hardcodear el return true en dungeon
+        if (vertex < size) {
+            vertexes[vertex].data = data;
+            return true; 
+        }
+        return false;
+    }
+
+    T getVertexData(unsigned int vertex) {
+        return vertexes[vertex].data;
+    }
+
+    unsigned int getSize() {
+        return size;
+    }
+
     bool insertEdge(unsigned int source, unsigned int destination) {
         if (!vertexes) {
             return false;
@@ -73,7 +102,7 @@ public:
             return false;
         }
 
-        return vertexes[source].edges.append(destination)) 
+        return vertexes[source].edges.append(destination);
     }
 
     bool deleteEdge(unsigned int source, unsigned int destination) {
@@ -90,7 +119,7 @@ public:
 
     void printGraph() {
         for (unsigned int i = 0; i < size; ++i) {
-            cout << "Vertex " << i << " (Data: " << vertexes[i].data << "):";
+            cout << vertexes[i].data << "Conexiones con los cuartos: ";
             vertexes[i].edges.printListForwards();
             cout << endl;
         }
@@ -167,7 +196,7 @@ public:
 			file.close();
 			return false;
 		}
-		if (!isdigit(line)) {
+		if (!isValidNumeric(line)) {
 			cout << "Graph size is not numerical" << endl;
 			file.close();
 			return false;
@@ -179,7 +208,7 @@ public:
 			return false;
 		}
 		deleteGraph();   
-		if (!crearGrafo(nSize)) {   
+		if (!createGraph(nSize)) {   
 			cout << "The graph could not be created" << endl;
 			file.close();
 			return false;
@@ -223,7 +252,7 @@ public:
 		}
 		file << "Grafo" << endl;    
 		file << size << endl;       
-		for (unsigned int i = 0; i < size; i++) {
+		for (unsigned int vertex = 0; vertex < size; vertex++) {
 			for (auto edge : vertexes[vertex].edges) {
 				file << edge << " ";
 			}
