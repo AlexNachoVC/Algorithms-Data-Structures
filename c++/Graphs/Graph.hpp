@@ -1,5 +1,5 @@
 #pragma once
-#include "DoublyLinkedList.hpp"
+#include "../DoublyLinkedLists/DoublyLinkedListTemplate.hpp"
 #include "Queue.hpp"
 #include <iostream>
 #include <fstream>
